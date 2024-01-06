@@ -24,6 +24,10 @@ mysqli_free_result($res);
 //close connection
 mysqli_close($connection);
 
+//we are going to use 3XPLOSE method to convert ingredients to array
+$exp = explode(",", $pizzas[0]["ingredients"]);
+//print_r($exp)
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +44,13 @@ mysqli_close($connection);
                         <?php echo htmlspecialchars($pizza["title"]); ?>
                     </h6>
                     <div>
-                        <?php echo htmlspecialchars($pizza["ingredients"]); ?>
+                        <ul>
+                            <?php  foreach (explode("," , $pizza["ingredients"]) as $ing); {?>
+                                <li>
+                                    <?php echo htmlspecialchars($ing); ?>
+                                </li>
+                            <?php }?>
+                        </ul>
                     </div>
                 </div>
                 <div class="card-action right-align">

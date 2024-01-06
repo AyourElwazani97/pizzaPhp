@@ -1,4 +1,5 @@
 <?php 
+include("config/db_connection.php");
 /*
 $errors = array("email"=>"","title"=>"","ingredients"=>"");
    if(isset($_GET["submit"])) {
@@ -6,12 +7,13 @@ $errors = array("email"=>"","title"=>"","ingredients"=>"");
         echo $_GET["title"];
         echo $_GET["ingredients"];
     }
+    */
     //using POST method
-
+    $errors = array("email"=>"","title"=>"","ingredients"=>"");
     if(isset($_POST["submit"])) {
         echo $_POST["email"];
         echo $_POST["title"];
-        echo htmlspecialchars($_POST["ingredients"]); //htmlspec... is used to prevent XSS attacks
+        //echo htmlspecialchars($_POST["ingredients"]); //htmlspec... is used to prevent XSS attacks
         //form validation
         if(empty($_POST["email"]) || empty($_POST["title"]) ) {
             echo "please fill all the fields";
@@ -29,17 +31,8 @@ $errors = array("email"=>"","title"=>"","ingredients"=>"");
         echo "there is errors";
     }else {
         //redirect user => header('location:index.php');
-        
+        //submitting data
     }
-*/
-//connecting db
-$connection = mysqli_connect("localhost","ayoub","ayoub123","ninjapizza");
-//check for errors
-if (!$connection) {
-    //mysqli_connect_error() => to display error of database
-    echo "connection error : " . mysqli_connect_error();
-}
-
 
 ?>
 <section class="container grey-text">
@@ -48,11 +41,9 @@ if (!$connection) {
     </h4>
     <form action="add.php" class="white" method="POST">
         <div class="red-text">
-        <!-- 
         <?php 
             echo $errors["email"]
         ?>
-        -->
         </div>
         <label >Email : </label>
         <input type="text" name="email">
